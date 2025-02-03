@@ -7,6 +7,8 @@ class AddNoteController extends GetxController {
   RxBool isHidden = true.obs;
   TextEditingController titleC = TextEditingController();
   TextEditingController descC = TextEditingController();
+  TextEditingController dateC = TextEditingController();
+
   SupabaseClient client = Supabase.instance.client;
 
   Future<bool> addNote() async {
@@ -23,6 +25,7 @@ class AddNoteController extends GetxController {
         "title": titleC.text,
         "description": descC.text,
         "created_at": DateTime.now().toIso8601String(),
+        "date": dateC.text
       });
       return true;
     } else {

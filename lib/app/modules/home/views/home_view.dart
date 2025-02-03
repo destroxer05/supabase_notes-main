@@ -46,7 +46,7 @@ class HomeView extends GetView<HomeController> {
                             child: Text("t${note.id}"),
                           ),
                           title: Text("title: ${note.title}"),
-                          subtitle: Text("description: ${note.description}"),
+                          subtitle: Text("description: ${note.description} - date: ${note.date}"),
                           trailing: IconButton(
                             onPressed: () async =>
                                 await controller.deleteNote(note.id!),

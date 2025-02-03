@@ -4,8 +4,9 @@ class Notes {
   String? title;
   String? description;
   String? createdAt;
+  DateTime? date;
 
-  Notes({this.id, this.userId, this.title, this.description, this.createdAt});
+  Notes({this.id, this.userId, this.title, this.description, this.createdAt, this.date});
 
   Notes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -13,6 +14,7 @@ class Notes {
     title = json['title'];
     description = json['description'];
     createdAt = json['created_at'];
+    date = DateTime.parse(json['date']);
   }
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class Notes {
     data['title'] = title;
     data['description'] = description;
     data['created_at'] = createdAt;
+    data['date'] = date?.toIso8601String();
     return data;
   }
 

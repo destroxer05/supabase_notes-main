@@ -16,6 +16,7 @@ class EditNoteView extends GetView<EditNoteController> {
   Widget build(BuildContext context) {
     controller.titleC.text = note.title!;
     controller.descC.text = note.description!;
+    controller.dateC.text = note.date?.toIso8601String() ?? '';
     return Scaffold(
         appBar: AppBar(
           title: const Text('Edit Note'),
@@ -40,6 +41,29 @@ class EditNoteView extends GetView<EditNoteController> {
                 labelText: "Description",
                 border: OutlineInputBorder(),
               ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            TextField(
+              controller: controller.dateC,
+              readOnly: true,
+              decoration: const InputDecoration(
+                labelText: "Date",
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.calendar_today),
+              ),
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2101),
+                );
+                if (pickedDate != null) {
+                  controller.dateC.text = pickedDate.toIso8601String();
+                }
+              },
             ),
             const SizedBox(
               height: 20,

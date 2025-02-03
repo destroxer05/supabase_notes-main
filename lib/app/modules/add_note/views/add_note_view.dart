@@ -41,6 +41,29 @@ class AddNoteView extends GetView<AddNoteController> {
             const SizedBox(
               height: 20,
             ),
+            TextField(
+              controller: controller.dateC,
+              readOnly: true,
+              decoration: const InputDecoration(
+                labelText: "Date",
+                border: OutlineInputBorder(),
+                suffixIcon: Icon(Icons.calendar_today),
+              ),
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2101),
+                );
+                if (pickedDate != null) {
+                  controller.dateC.text = pickedDate.toIso8601String();
+                }
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Obx(() => ElevatedButton(
                 onPressed: () async {
                   if (controller.isLoading.isFalse) {
